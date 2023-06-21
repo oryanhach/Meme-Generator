@@ -10,7 +10,7 @@ function goToGenerator(idx){
     
     elGenerator.style.display = 'grid'
     initCanvas()
-    renderMeme(idx)
+    renderImage(idx)
 }
 
 function goToGallery(){

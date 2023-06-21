@@ -8,10 +8,10 @@ function initCanvas() {
     gCtx = gElCanvas.getContext('2d');
 }
 
-function renderMeme(idx) {
-    const imgIdx = idx + 1
+function renderImage(idx) {
+    const meme = getImage(idx)
     const img = new Image()
-    img.src = `./images/${imgIdx}.jpg`
+    img.src = `${meme.url}`
     img.onload = () => {
         gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)

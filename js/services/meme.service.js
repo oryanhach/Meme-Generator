@@ -27,3 +27,10 @@ function _createGallery() {
     )
 }
 
+function getImage(idx) {
+    return gImgs.find((image) => image.id === idx)
+}
+
+var gMeme = {
+
+}
