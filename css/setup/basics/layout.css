@@ -20,10 +20,11 @@
     gap: 1em;
 }
 
-.gallery-container img{
+.gallery-container img {
     width: 100px;
 }
 
-.generator-layout{
+.generator-layout {
     display: none;
+    grid-template-columns: 2fr 1fr;
 }

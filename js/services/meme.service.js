@@ -1,6 +1,19 @@
 'use strict'
 
 var gImgs = []
+var gMeme = {
+    selectedImgId: null,
+    selectedLineIdx: null,
+    Lines: [
+        {
+            txt: '-',
+            size: null,
+            color: null
+        }
+    ]
+
+
+}
 
 _createGallery()
 
@@ -28,7 +41,7 @@ function _createGallery() {
 }
 
 function getImage(idx) {
-    return gImgs.find((image) => image.id === idx)
+    return gImgs.find((image) => image.id - 1 === idx)
 }
 
 var gMeme = {

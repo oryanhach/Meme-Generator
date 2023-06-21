@@ -16,4 +16,9 @@ function renderImage(idx) {
         gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
     }
+    
+}
+
+function renderMeme() {
+
 }
