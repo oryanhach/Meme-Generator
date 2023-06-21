@@ -8,21 +8,35 @@
     <title>Meme Generator</title>
 </head>
 
-<body class="main-layout">
+<body onload="onInit()">
 
-    <nav class="nav-container">
-        <h1 class="logo">Meme Generator</h1>
-        <p class="meme-page">Memes</p>
-        <p class="gallery-page">Gallery</p>
-        <p class="about-page">About</p>
-    </nav>
+    <!-- HOME PAGE -->
+    <section class="home-layout">
 
-    <input class="search-bar" type="text">
+        <nav class="nav-container">
+            <h1 class="logo">Meme Generator</h1>
+            <ul class="pages">
+                <li class="meme-page">Memes</li>
+                <li class="gallery-page">Gallery</li>
+                <li class="about-page">About</li>
+            </ul>
 
-    <section class="gallery-container">
+        </nav>
 
+        <input class="search-bar" placeholder="Search" type="text">
+
+        <section class="gallery-container">
+
+        </section>
+        <script src="./js/services/gallery.service.js"></script>
+        <script src="./js/gallery.controller.js"></script>
+        <script src="./js/pages.controller.js"></script>
     </section>
 
+    <!-- GENERATOR PAGE -->
+    <section class="generator-layout">
+
+    </section>
 
 </body>
 

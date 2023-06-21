@@ -1,10 +1,10 @@
 /* SETUP */
-@import url("setup/variables.css");
-@import url("setup/typography.css");
+@import url("./setup/variables.css");
+@import url("./setup/typography.css");
 
 /* BASICS */
-@import url("basics/base.css");
-@import url("basics/layout.css");
+@import url("./basics/base.css");
+@import url("./basics/layout.css");
 
 /* COMPONENTS */
 /* MQ */
