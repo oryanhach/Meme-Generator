@@ -44,14 +44,14 @@
         <section class="editor-container">
             <header class="editor-header">Edit Text Lines</header>
             <section class="text-editor-container">
-                <select class="font-select">
-                    <option>Font1</option>
-                    <option>Font2</option>
-                    <option>Font3</option>
+                <select class="font-select" value="impact" onchange="onChangeFont(this)">
+                    <option value="impact">Impact</option>
+                    <option value="arial">Arial</option>
+                    <option value="verdana">Verdana</option>
                 </select>
-                <p>+</p>
-                <p>-</p>
-                <input class="text-editor" type="text">
+                <button class="plus-btn">+</button>
+                <button class="minus-btn">-</button>
+                <input class="text-editor" type="text" oninput="onSetLineTxt(this)">
             </section>
 
         </section>

@@ -3,11 +3,12 @@
 var gImgs = []
 var gMeme = {
     selectedImgId: null,
-    selectedLineIdx: null,
+    selectedLine: 'top',
     Lines: [
         {
-            txt: '-',
-            size: null,
+            txt: '',
+            font: 'impact',
+            size: 2,
             color: null
         }
     ]
@@ -41,9 +42,27 @@ function _createGallery() {
 }
 
 function getImage(idx) {
+    gMeme.selectedImgId = idx
     return gImgs.find((image) => image.id - 1 === idx)
 }
 
-var gMeme = {
-
+function setLineTxt(ev) {
+    gMeme.Lines[0].txt = ev.value
+    renderMeme()
 }
+
+function changeFont(ev) {
+    gMeme.Lines[0].font = ev
+    renderImage(gMeme.selectedImgId)
+    renderMeme()
+}
+
+function getMemeInfo() {
+    return gMeme
+}
+
+function clearText() {
+    gMeme.Lines[0].txt = ''
+    renderMeme()
+}
+
