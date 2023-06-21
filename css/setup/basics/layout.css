@@ -23,3 +23,7 @@
 .gallery-container img{
     width: 100px;
 }
+
+.generator-layout{
+    display: none;
+}

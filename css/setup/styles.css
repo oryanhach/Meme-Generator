@@ -7,4 +7,5 @@
 @import url("./basics/layout.css");
 
 /* COMPONENTS */
+@import url("./components/canvas.css");
 /* MQ */

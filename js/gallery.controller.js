@@ -23,6 +23,5 @@ function renderGallery(gallery) {
 }
 
 function onClickedGalleryItem(idx) {
-    console.log(idx)
-    goToGeneratorPage()
+    goToGenerator(idx)
 }
