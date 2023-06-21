@@ -9,7 +9,7 @@ var gMeme = {
             txt: '',
             font: 'impact',
             size: 2,
-            color: null
+            color: 'black'
         }
     ]
 
@@ -59,6 +59,10 @@ function changeFont(ev) {
 function fontSizeChange(symbol) {
     if (symbol === '-' && gMeme.Lines[0].size >= 1) gMeme.Lines[0].size -= 0.5
     if (symbol === '+') gMeme.Lines[0].size += 0.5
+}
+
+function changeColor(color){
+    gMeme.Lines[0].color = color
 }
 
 function getMemeInfo() {

@@ -17,6 +17,7 @@ function renderImage(idx) {
     img.onload = () => {
         gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+        renderMeme()
     }
 }
 
@@ -35,6 +36,11 @@ function onClearText() {
     clearCanvas()
 }
 
+function onChangeColor(color) {
+    changeColor(color)
+    renderImage(gCurrImgIdx)
+ }
+
 function onFontSizeChange(symbol) {
     fontSizeChange(symbol)
     clearText()
@@ -47,7 +53,8 @@ function renderMeme() {
     const MEME_INFO = getMemeInfo()
     const MEME_FONT = MEME_INFO.Lines[0].font
     const MEME_SIZE = MEME_INFO.Lines[0].size
-    gCtx.fillStyle = 'black'
+    const MEME_COLOR = MEME_INFO.Lines[0].color
+    gCtx.fillStyle = `${MEME_COLOR}`
     gCtx.font = `${MEME_SIZE}em ${MEME_FONT}`
     gCtx.fillText(`${MEME_INFO.Lines[0].txt}`, (gElCanvas.width / 11), (gElCanvas.height / 8) + 8)
 }
@@ -60,3 +67,9 @@ function clearInput() {
     const elInput = document.querySelector('.text-editor')
     elInput.value = ''
 }
+
+function downloadImg(elLink) {
+    const imgContent = gElCanvas.toDataURL('image/jpeg')
+    elLink.href = imgContent
+}
+
