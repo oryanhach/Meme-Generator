@@ -2,6 +2,7 @@
 
 let gElCanvas
 let gCtx
+var gCurrImgIdx
 
 function initCanvas() {
     gElCanvas = document.querySelector('#my-canvas')
@@ -9,6 +10,7 @@ function initCanvas() {
 }
 
 function renderImage(idx) {
+    gCurrImgIdx = idx
     const meme = getImage(idx)
     const img = new Image()
     img.src = `${meme.url}`
@@ -25,12 +27,20 @@ function onSetLineTxt(ev) {
 function onChangeFont(ev) {
     changeFont(ev.value)
     onClearText()
+    clearInput()
 }
 
 function onClearText() {
     clearText()
     clearCanvas()
-    document.querySelector('.text-editor').value = ''
+}
+
+function onFontSizeChange(symbol) {
+    fontSizeChange(symbol)
+    clearText()
+    renderImage(gCurrImgIdx)
+    renderMeme()
+    clearInput()
 }
 
 function renderMeme() {
@@ -44,4 +54,9 @@ function renderMeme() {
 
 function clearCanvas() {
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
+}
+
+function clearInput() {
+    const elInput = document.querySelector('.text-editor')
+    elInput.value = ''
 }

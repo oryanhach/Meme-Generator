@@ -54,7 +54,11 @@ function setLineTxt(ev) {
 function changeFont(ev) {
     gMeme.Lines[0].font = ev
     renderImage(gMeme.selectedImgId)
-    renderMeme()
+}
+
+function fontSizeChange(symbol) {
+    if (symbol === '-' && gMeme.Lines[0].size >= 1) gMeme.Lines[0].size -= 0.5
+    if (symbol === '+') gMeme.Lines[0].size += 0.5
 }
 
 function getMemeInfo() {
