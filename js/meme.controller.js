@@ -6,17 +6,14 @@ let gCtx
 function initCanvas() {
     gElCanvas = document.querySelector('#my-canvas');
     gCtx = gElCanvas.getContext('2d');
-
-    window.addEventListener('resize', ()=>{
-        resizeCanvas()
-    })
 }
 
-function resizeCanvas(){
-    const elContainer = document.querySelector('.canvas-container')
-    gElCanvas.width = elContainer.offsetWidth
-}
-
-function renderMeme(idx){
-    
+function renderMeme(idx) {
+    const imgIdx = idx + 1
+    const img = new Image()
+    img.src = `./images/${imgIdx}.jpg`
+    img.onload = () => {
+        gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
+        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+    }
 }
