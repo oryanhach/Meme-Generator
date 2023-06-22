@@ -2,7 +2,8 @@
 
 let gElCanvas
 let gCtx
-var gCurrImgIdx
+let gCurrImgIdx
+let gCurrLineIdx = 0
 
 function initCanvas() {
     gElCanvas = document.querySelector('#my-canvas')
@@ -27,7 +28,6 @@ function onSetLineTxt(ev) {
 
 function onChangeFont(ev) {
     changeFont(ev.value)
-    onClearText()
     clearInput()
 }
 
@@ -39,7 +39,7 @@ function onClearText() {
 function onChangeColor(color) {
     changeColor(color)
     renderImage(gCurrImgIdx)
- }
+}
 
 function onFontSizeChange(symbol) {
     fontSizeChange(symbol)
@@ -49,14 +49,23 @@ function onFontSizeChange(symbol) {
     clearInput()
 }
 
+function onSetRowIdx(direction) {
+    clearInput()
+    setRowIdx(direction)
+    if (direction === 'top') gCurrLineIdx = 0
+    if (direction === 'bottom') gCurrLineIdx = 1
+    updateCurrLineIdx(gCurrLineIdx)
+}
+
 function renderMeme() {
     const MEME_INFO = getMemeInfo()
-    const MEME_FONT = MEME_INFO.Lines[0].font
-    const MEME_SIZE = MEME_INFO.Lines[0].size
-    const MEME_COLOR = MEME_INFO.Lines[0].color
-    gCtx.fillStyle = `${MEME_COLOR}`
-    gCtx.font = `${MEME_SIZE}em ${MEME_FONT}`
-    gCtx.fillText(`${MEME_INFO.Lines[0].txt}`, (gElCanvas.width / 11), (gElCanvas.height / 8) + 8)
+    MEME_INFO.Lines.forEach((line, index) => {
+        const { txt, font, size, color } = line
+        const lineHeight = (index === 0) ? 8 : 350
+        gCtx.fillStyle = color
+        gCtx.font = `${size}em ${font}`
+        gCtx.fillText(txt, (gElCanvas.width / 11), (gElCanvas.height / 8) + lineHeight)
+    })
 }
 
 function clearCanvas() {

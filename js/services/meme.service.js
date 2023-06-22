@@ -3,8 +3,14 @@
 var gImgs = []
 var gMeme = {
     selectedImgId: null,
-    selectedLine: 'top',
+    selectedLineIdx: 0,
     Lines: [
+        {
+            txt: '',
+            font: 'impact',
+            size: 2,
+            color: 'black'
+        },
         {
             txt: '',
             font: 'impact',
@@ -12,8 +18,6 @@ var gMeme = {
             color: 'black'
         }
     ]
-
-
 }
 
 _createGallery()
@@ -47,13 +51,19 @@ function getImage(idx) {
 }
 
 function setLineTxt(ev) {
-    gMeme.Lines[0].txt = ev.value
+    gMeme.Lines[gMeme.selectedLineIdx].txt = ev.value
     renderMeme()
 }
 
-function changeFont(ev) {
-    gMeme.Lines[0].font = ev
+function setRowIdx(direction) {
+    if (direction === 'top') gMeme.selectedLineIdx = 0
+    if (direction === 'bottom') gMeme.selectedLineIdx = 1
+}
+
+function changeFont(fontName) {
+    gMeme.Lines[gMeme.selectedLineIdx].font = fontName
     renderImage(gMeme.selectedImgId)
+    renderMeme()
 }
 
 function fontSizeChange(symbol) {
@@ -61,8 +71,8 @@ function fontSizeChange(symbol) {
     if (symbol === '+') gMeme.Lines[0].size += 0.5
 }
 
-function changeColor(color){
-    gMeme.Lines[0].color = color
+function changeColor(color) {
+    gMeme.Lines[gMeme.selectedLineIdx].color = color
 }
 
 function getMemeInfo() {
@@ -70,7 +80,11 @@ function getMemeInfo() {
 }
 
 function clearText() {
-    gMeme.Lines[0].txt = ''
+    gMeme.Lines[gCurrLineIdx].txt = ''
     renderMeme()
+}
+
+function updateCurrLineIdx(idx) {
+    gMeme.selectedLineIdx = idx
 }
 

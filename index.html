@@ -49,8 +49,10 @@
                     <option value="arial">Arial</option>
                     <option value="verdana">Verdana</option>
                 </select>
-                <button class="plus-btn" onclick="onFontSizeChange('+')">+</button>
-                <button class="minus-btn" onclick="onFontSizeChange('-')">-</button>
+                <button class="plus-btn" onclick="onFontSizeChange('+')">A+</button>
+                <button class="minus-btn" onclick="onFontSizeChange('-')">A-</button>
+                <button class="top-row-btn" onclick="onSetRowIdx('top')">TOP ROW</button>
+                <button class="bottom-row-btn" onclick="onSetRowIdx('bottom')">BOTTOM ROW</button>
                 <input class="text-editor" type="text" oninput="onSetLineTxt(this)">
                 <input class="color-picker" type="color" onchange="onChangeColor(this.value)">
                 <a href="#" class="download-btn" onclick="downloadImg(this)" download="my-meme.jpg">DOWNLOAD</a>
