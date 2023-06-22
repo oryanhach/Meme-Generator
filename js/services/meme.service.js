@@ -9,13 +9,17 @@ var gMeme = {
             txt: '',
             font: 'impact',
             size: 2,
-            color: 'black'
+            color: 'white',
+            width: 100,
+            height: 30,
         },
         {
             txt: '',
             font: 'impact',
             size: 2,
-            color: 'black'
+            color: 'white',
+            width: 30,
+            height: 30,
         }
     ]
 }
@@ -88,3 +92,19 @@ function updateCurrLineIdx(idx) {
     gMeme.selectedLineIdx = idx
 }
 
+function switchLine() {
+    switch (gMeme.selectedLineIdx) {
+        case 0:
+            gMeme.selectedLineIdx = 1
+            break
+        case 1:
+            gMeme.selectedLineIdx = 0
+            break
+    }
+}
+
+function getLineInput(idx) {
+    const txtInput = gMeme.Lines[idx].txt
+    return txtInput
+
+}
