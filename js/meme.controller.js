@@ -44,10 +44,8 @@ function onChangeColor(color) {
 
 function onFontSizeChange(symbol) {
     fontSizeChange(symbol)
-    clearText()
     renderImage(gCurrImgIdx)
     renderMeme()
-    clearInput()
 }
 
 function onSetRowIdx(direction) {
@@ -132,3 +130,9 @@ function updateLineInput(idx) {
     const txtInput = getLineInput(idx)
     elInput.value = txtInput
 }
+
+
+// TODO - get rid of top bottom buttons.
+// TODO - frame, when out of focus, remove frame.
+// TODO - frame, use examples from inclass.
+// TODO - after finishing phase 5 >>> check pdf for missing requirements >>> phase 6.
