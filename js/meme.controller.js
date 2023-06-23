@@ -34,7 +34,6 @@ function onDown(ev) {
     const pos = getEvPos(ev)
     console.log(pos)
     isLineSelected(pos)
-
 }
 
 function getEvPos(ev) {
@@ -44,13 +43,24 @@ function getEvPos(ev) {
     }
     return pos
 }
-
+// TODO - check if clicked position is inside the line's position
 function isLineSelected(pos) {
     const lines = getMemeInfo()
-    console.log(lines.Lines[0].pos)
-    console.log(pos)
+    for (var i = 0; i < 2; i++) {
+        if (
+            pos.x >= lines.Lines[i].pos.startX &&
+            pos.x <= lines.Lines[i].pos.endX &&
+            pos.y >= lines.Lines[i].pos.startY &&
+            pos.y <= lines.Lines[i].pos.endY
+        ) {
+            if (i === 0) {
+                console.log('First line selected')
+            } else if (i === 1) {
+                console.log('Second line selected')
+            }
+        }
+    }
 }
-
 
 function onSetLineTxt(ev) {
     setLineTxt(ev)
@@ -88,13 +98,13 @@ function renderMeme() {
         const MEME_INFO = getMemeInfo()
         MEME_INFO.Lines.forEach((line, index) => {
             const { txt, font, size, color } = line
-            const LINE_HEIGHT = (index === 0) ? 8 : 350
+            const startY = (index === 0) ? 8 : 350
             gCtx.fillStyle = color
             gCtx.font = `${size}em ${font}`
-            gCtx.fillText(txt, (gElCanvas.width / 11), (gElCanvas.height / 8) + LINE_HEIGHT)
-            gCtx.strokeText(txt, (gElCanvas.width / 11), (gElCanvas.height / 8) + LINE_HEIGHT)
-            if (line.txt.length > 0 && gIsFocused && line.isSelected) {
-                renderRect(index, MEME_INFO.Lines, LINE_HEIGHT, size)
+            gCtx.fillText(txt, (gElCanvas.width / 11), (gElCanvas.height / 8) + startY)
+            gCtx.strokeText(txt, (gElCanvas.width / 11), (gElCanvas.height / 8) + startY)
+            if (gIsFocused && line.isSelected) {
+                renderRect(index, MEME_INFO.Lines, startY, size)
             }
         })
     }
@@ -103,8 +113,7 @@ function renderMeme() {
 function renderRect(index, lines, lineHeight, size) {
     const WIDTH = getTextWidth(index, lines)
     gCtx.strokeRect((gElCanvas.width / 11), (gElCanvas.height / 8) + lineHeight - 16 * size, WIDTH, size * 16)
-    onUpdateLinePos(index, (gElCanvas.width / 11), (gElCanvas.height / 8) + lineHeight - 16 * size, WIDTH, size * 16)
-    console.log(getMemeInfo())
+    onUpdateLinePos(index, (gElCanvas.width / 11), (gElCanvas.height / 8) + lineHeight - 16 * size, WIDTH + (gElCanvas.width / 11), (gElCanvas.height / 8) + lineHeight - 16 * size + size * 16)
 }
 
 function onUpdateLinePos(index, startX, startY, endX, endY) {
@@ -165,5 +174,4 @@ function updateLineInput(idx) {
 }
 
 
-// TODO - frame click, use examples from inclass.
 // TODO - after finishing phase 5 >>> check pdf for missing requirements >>> phase 6.

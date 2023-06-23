@@ -136,5 +136,4 @@ function updateLinePos(index, startX, startY, endX, endY) {
     gMeme.Lines[index].pos.startY = startY
     gMeme.Lines[index].pos.endX = endX
     gMeme.Lines[index].pos.endY = endY
-    console.log(gMeme.Lines[index].pos)
 }
