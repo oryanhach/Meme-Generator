@@ -43,7 +43,6 @@ function getEvPos(ev) {
     }
     return pos
 }
-// TODO - check if clicked position is inside the line's position
 function isLineSelected(pos) {
     const lines = getMemeInfo()
     for (var i = 0; i < 2; i++) {
@@ -55,11 +54,25 @@ function isLineSelected(pos) {
         ) {
             if (i === 0) {
                 console.log('First line selected')
+                getEditor(i)
+                updateCurrLineIdx(i)
+                updateSelectedLine(i)
             } else if (i === 1) {
                 console.log('Second line selected')
+                getEditor(i)
+                updateCurrLineIdx(i)
+                updateSelectedLine(i)
             }
         }
     }
+}
+
+function getEditor(idx) {
+    const elInput = document.querySelector('.text-editor')
+    const line = getMemeInfo().Lines[idx]
+    elInput.focus()
+    updateLineInput(idx)
+
 }
 
 function onSetLineTxt(ev) {
