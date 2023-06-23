@@ -5,6 +5,7 @@ let gCtx
 let gCurrImgIdx
 let gCurrLineIdx = 0
 let gSelectedLine = 0
+let gIsFocused = false
 
 function initCanvas() {
     gElCanvas = document.querySelector('#my-canvas')
@@ -25,6 +26,7 @@ function renderImage(idx) {
 
 function onSetLineTxt(ev) {
     setLineTxt(ev)
+    gIsFocused = true
 }
 
 function onChangeFont(ev) {
@@ -63,7 +65,7 @@ function renderMeme() {
             gCtx.font = `${size}em ${font}`
             gCtx.fillText(txt, (gElCanvas.width / 11), (gElCanvas.height / 8) + LINE_HEIGHT)
             gCtx.strokeText(txt, (gElCanvas.width / 11), (gElCanvas.height / 8) + LINE_HEIGHT)
-            if (line.txt.length > 0) {
+            if (line.txt.length > 0 && gIsFocused && line.isSelected) {
                 renderRect(index, MEME_INFO.Lines, LINE_HEIGHT, size)
             }
         })
@@ -98,8 +100,9 @@ function downloadImg(elLink) {
 
 function onAddLine() {
     const elInput = document.querySelector('.text-editor')
-    clearInput()
     elInput.blur()
+    gIsFocused = false
+    renderMeme()
 }
 
 function onSwitchLine() {
@@ -110,11 +113,13 @@ function onSwitchLine() {
             gCurrLineIdx = 1
             updateLineInput(1)
             updateCurrLineIdx(gCurrLineIdx)
+            updateSelectedLine(1)
             break
         case 1:
             gCurrLineIdx = 0
             updateLineInput(0)
             updateCurrLineIdx(gCurrLineIdx)
+            updateSelectedLine(0)
             break
     }
 }
@@ -126,7 +131,6 @@ function updateLineInput(idx) {
 }
 
 
-// TODO - get rid of top bottom buttons.
 // TODO - frame, when out of focus, remove frame.
-// TODO - frame, use examples from inclass.
+// TODO - frame click, use examples from inclass.
 // TODO - after finishing phase 5 >>> check pdf for missing requirements >>> phase 6.

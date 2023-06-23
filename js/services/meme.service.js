@@ -12,6 +12,7 @@ var gMeme = {
             color: 'white',
             width: 100,
             height: 30,
+            isSelected: true,
         },
         {
             txt: '',
@@ -20,6 +21,7 @@ var gMeme = {
             color: 'white',
             width: 30,
             height: 30,
+            isSelected: false,
         }
     ]
 }
@@ -86,6 +88,18 @@ function clearText() {
 
 function updateCurrLineIdx(idx) {
     gMeme.selectedLineIdx = idx
+}
+
+function updateSelectedLine(index) {
+    if (index === 0) {
+        gMeme.Lines[0].isSelected = true
+        gMeme.Lines[1].isSelected = false
+        renderMeme()
+    } else {
+        gMeme.Lines[1].isSelected = true
+        gMeme.Lines[0].isSelected = false
+        renderMeme()
+    }
 }
 
 function switchLine() {
