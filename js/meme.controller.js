@@ -6,6 +6,8 @@ let gCurrImgIdx
 let gCurrLineIdx = 0
 let gSelectedLine = 0
 let gIsFocused = false
+let gIsDragging = false
+let movePos = { x: 0, y: 0 }
 
 function initCanvas() {
     gElCanvas = document.querySelector('#my-canvas')
@@ -28,12 +30,32 @@ function renderImage(idx) {
 
 function addEventListeners() {
     gElCanvas.addEventListener('mousedown', onDown)
+    document.addEventListener('mousemove', onMove)
+    document.addEventListener('mouseup', onUp)
 }
 
 function onDown(ev) {
     const pos = getEvPos(ev)
     console.log(pos)
     isLineSelected(pos)
+}
+
+function onMove(ev) {
+    if (gIsDragging) {
+        let pos = getEvPos(ev)
+        movePos.x = pos.x
+        movePos.y = pos.y
+        console.log('movePos:', movePos)
+        const WIDTH = getTextWidth(gSelectedLine, getMemeInfo().Lines)
+        const startY = (gSelectedLine === 0) ? 8 : 350
+        const size = getMemeInfo().Lines[gSelectedLine].size
+        onUpdateLinePos(gSelectedLine, movePos.x, movePos.y, WIDTH + (gElCanvas.width / 11), (gElCanvas.height / 8) + startY - 16 * size + size * 16)
+        console.log(getMemeInfo().Lines)
+    }
+}
+
+function onUp() {
+    gIsDragging = false
 }
 
 function getEvPos(ev) {
@@ -43,6 +65,7 @@ function getEvPos(ev) {
     }
     return pos
 }
+
 function isLineSelected(pos) {
     const lines = getMemeInfo()
     for (var i = 0; i < 2; i++) {
@@ -57,11 +80,13 @@ function isLineSelected(pos) {
                 getEditor(i)
                 updateCurrLineIdx(i)
                 updateSelectedLine(i)
+                gIsDragging = true
             } else if (i === 1) {
                 console.log('Second line selected')
                 getEditor(i)
                 updateCurrLineIdx(i)
                 updateSelectedLine(i)
+                gIsDragging = true
             }
         }
     }
