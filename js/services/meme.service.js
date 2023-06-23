@@ -59,11 +59,6 @@ function setLineTxt(ev) {
     renderMeme()
 }
 
-function setRowIdx(direction) {
-    if (direction === 'top') gMeme.selectedLineIdx = 0
-    if (direction === 'bottom') gMeme.selectedLineIdx = 1
-}
-
 function changeFont(fontName) {
     gMeme.Lines[gMeme.selectedLineIdx].font = fontName
     renderImage(gMeme.selectedImgId)
@@ -71,8 +66,9 @@ function changeFont(fontName) {
 }
 
 function fontSizeChange(symbol) {
-    if (symbol === '-' && gMeme.Lines[0].size >= 1) gMeme.Lines[0].size -= 0.5
-    if (symbol === '+') gMeme.Lines[0].size += 0.5
+    const currLineIdx = gMeme.selectedLineIdx
+    if (symbol === '-' && gMeme.Lines[currLineIdx].size >= 1) gMeme.Lines[currLineIdx].size -= 0.5
+    if (symbol === '+') gMeme.Lines[currLineIdx].size += 0.5
 }
 
 function changeColor(color) {

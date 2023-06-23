@@ -48,14 +48,6 @@ function onFontSizeChange(symbol) {
     renderMeme()
 }
 
-function onSetRowIdx(direction) {
-    clearInput()
-    setRowIdx(direction)
-    if (direction === 'top') gCurrLineIdx = 0
-    if (direction === 'bottom') gCurrLineIdx = 1
-    updateCurrLineIdx(gCurrLineIdx)
-}
-
 function renderMeme() {
     const meme = getImage(gCurrImgIdx)
     const img = new Image()
@@ -117,10 +109,12 @@ function onSwitchLine() {
         case 0:
             gCurrLineIdx = 1
             updateLineInput(1)
+            updateCurrLineIdx(gCurrLineIdx)
             break
         case 1:
             gCurrLineIdx = 0
             updateLineInput(0)
+            updateCurrLineIdx(gCurrLineIdx)
             break
     }
 }
