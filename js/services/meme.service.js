@@ -13,6 +13,12 @@ var gMeme = {
             width: 100,
             height: 30,
             isSelected: true,
+            pos: {
+                startX: 0,
+                startY: 0,
+                endX: 0,
+                endY: 0,
+            }
         },
         {
             txt: '',
@@ -22,6 +28,12 @@ var gMeme = {
             width: 30,
             height: 30,
             isSelected: false,
+            pos: {
+                startX: 0,
+                startY: 0,
+                endX: 0,
+                endY: 0,
+            }
         }
     ]
 }
@@ -117,4 +129,12 @@ function getLineInput(idx) {
     const txtInput = gMeme.Lines[idx].txt
     return txtInput
 
+}
+
+function updateLinePos(index, startX, startY, endX, endY) {
+    gMeme.Lines[index].pos.startX = startX
+    gMeme.Lines[index].pos.startY = startY
+    gMeme.Lines[index].pos.endX = endX
+    gMeme.Lines[index].pos.endY = endY
+    console.log(gMeme.Lines[index].pos)
 }

@@ -10,6 +10,8 @@ let gIsFocused = false
 function initCanvas() {
     gElCanvas = document.querySelector('#my-canvas')
     gCtx = gElCanvas.getContext('2d')
+
+    addEventListeners()
 }
 
 function renderImage(idx) {
@@ -23,6 +25,32 @@ function renderImage(idx) {
         renderMeme()
     }
 }
+
+function addEventListeners() {
+    gElCanvas.addEventListener('mousedown', onDown)
+}
+
+function onDown(ev) {
+    const pos = getEvPos(ev)
+    console.log(pos)
+    isLineSelected(pos)
+
+}
+
+function getEvPos(ev) {
+    let pos = {
+        x: ev.offsetX,
+        y: ev.offsetY,
+    }
+    return pos
+}
+
+function isLineSelected(pos) {
+    const lines = getMemeInfo()
+    console.log(lines.Lines[0].pos)
+    console.log(pos)
+}
+
 
 function onSetLineTxt(ev) {
     setLineTxt(ev)
@@ -75,6 +103,12 @@ function renderMeme() {
 function renderRect(index, lines, lineHeight, size) {
     const WIDTH = getTextWidth(index, lines)
     gCtx.strokeRect((gElCanvas.width / 11), (gElCanvas.height / 8) + lineHeight - 16 * size, WIDTH, size * 16)
+    onUpdateLinePos(index, (gElCanvas.width / 11), (gElCanvas.height / 8) + lineHeight - 16 * size, WIDTH, size * 16)
+    console.log(getMemeInfo())
+}
+
+function onUpdateLinePos(index, startX, startY, endX, endY) {
+    updateLinePos(index, startX, startY, endX, endY)
 }
 
 function getTextWidth(lineIdx, lines) {
@@ -131,6 +165,5 @@ function updateLineInput(idx) {
 }
 
 
-// TODO - frame, when out of focus, remove frame.
 // TODO - frame click, use examples from inclass.
 // TODO - after finishing phase 5 >>> check pdf for missing requirements >>> phase 6.
