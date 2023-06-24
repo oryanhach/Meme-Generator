@@ -1,0 +1,6 @@
+.gallery-container img {
+    width: 200px;
+    border: 1px solid #00000020;
+    border-radius: 0.8rem;
+}
+

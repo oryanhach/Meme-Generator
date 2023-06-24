@@ -1,0 +1,14 @@
+.nav-container {
+    background-color: rgb(189, 178, 178);
+    border: 1px solid #00000020;
+}
+
+.nav-container .logo{
+    font-family: Montserrat;
+    margin-inline-start: 2%;
+}
+
+.nav-container .pages{
+    font-family: Shrikhand;
+    margin-inline-end: 2%;
+}

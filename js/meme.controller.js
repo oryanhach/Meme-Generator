@@ -47,7 +47,6 @@ function onMove(ev) {
         let mouseY = ev.offsetY
 
         let dx = mouseX - gDragStartPos.x
-        console.log('dx:',dx)
         let dy = mouseY - gDragStartPos.y
 
         let currLine = getMemeInfo().Lines[gMeme.selectedLineIdx]

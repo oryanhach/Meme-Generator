@@ -8,4 +8,7 @@
 
 /* COMPONENTS */
 @import url("./components/canvas.css");
+@import url("./components/navbar.css");
+@import url("./components/search-bar.css");
+@import url("./components/gallery-container.css");
 /* MQ */
