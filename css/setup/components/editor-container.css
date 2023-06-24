@@ -1,0 +1,66 @@
+.editor-header {
+    font-family: Shrikhand;
+    font-size: 1.5em;
+    color: rgb(97, 97, 97);
+    margin-block-start: 2%;
+    grid-column-start: 1;
+    grid-column-end: -1;
+    justify-self: center;
+}
+
+.text-editor-container {
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 14px;
+    padding: 7px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 15px 0 rgba(0, 0, 0, 0.1);
+}
+
+.font-select {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.09), 0 6px 15px 0 rgba(0, 0, 0, 0.09);
+    border-radius: 7px;
+    height: 2em;
+}
+
+.minus-btn {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.09), 0 6px 15px 0 rgba(0, 0, 0, 0.09);
+    border-radius: 7px;
+    height: 2em;
+}
+
+.plus-btn {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.09), 0 6px 15px 0 rgba(0, 0, 0, 0.09);
+    border-radius: 7px;
+    height: 2em;
+}
+
+.add-line-btn {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.09), 0 6px 15px 0 rgba(0, 0, 0, 0.09);
+    border-radius: 7px;
+    height: 2em;
+}
+
+.switch-line-btn {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.09), 0 6px 15px 0 rgba(0, 0, 0, 0.09);
+    border-radius: 7px;
+    height:2em;
+}
+
+.color-picker {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.09), 0 6px 15px 0 rgba(0, 0, 0, 0.09);
+    border-radius: 7px;
+    height: 2em;
+}
+
+.download-btn{
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.09), 0 6px 15px 0 rgba(0, 0, 0, 0.09);
+    border-radius: 7px;
+    height: 2em;
+}

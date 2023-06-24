@@ -1,0 +1,5 @@
+.canvas-container{
+    background-color: antiquewhite;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
