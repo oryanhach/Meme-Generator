@@ -9,12 +9,16 @@ let gIsFocused = false
 let gIsDragging = false
 let gDragStartPos = { x: 0, y: 0 }
 let gisClicked = false
+const gTouchEvents = ['touchstart', 'touchmove', 'touchend']
+
+
 
 function initCanvas() {
     gElCanvas = document.querySelector('#my-canvas')
     gCtx = gElCanvas.getContext('2d')
 
     addEventListeners()
+    addTouchListeners()
 }
 
 function renderImage(idx) {
@@ -33,6 +37,12 @@ function addEventListeners() {
     gElCanvas.addEventListener('mousedown', onDown)
     gElCanvas.addEventListener('mousemove', onMove)
     gElCanvas.addEventListener('mouseup', onUp)
+}
+
+function addTouchListeners() {
+    gElCanvas.addEventListener('touchstart', onDown)
+    gElCanvas.addEventListener('touchmove', onMove)
+    gElCanvas.addEventListener('touchend', onUp)
 }
 
 function onDown(ev) {
@@ -67,8 +77,18 @@ function getEvPos(ev) {
         x: ev.offsetX,
         y: ev.offsetY,
     }
+
+    if (gTouchEvents.includes(ev.type)) {
+        ev.preventDefault()
+        ev = ev.changedTouches[0]
+        pos = {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+        }
+    }
     return pos
 }
+
 
 function isLineSelected(pos) {
     const lines = getMemeInfo()
@@ -80,13 +100,11 @@ function isLineSelected(pos) {
             pos.y >= lines.Lines[i].pos.endY
         ) {
             if (i === 0) {
-                console.log('First line selected')
                 getEditor(i)
                 updateCurrLineIdx(i)
                 updateSelectedLine(i)
                 gIsDragging = true
             } else if (i === 1) {
-                console.log('Second line selected')
                 getEditor(i)
                 updateCurrLineIdx(i)
                 updateSelectedLine(i)
@@ -181,8 +199,13 @@ function clearInput() {
 }
 
 function downloadImg(elLink) {
-    const imgContent = gElCanvas.toDataURL('image/jpeg')
-    elLink.href = imgContent
+    gIsFocused = false
+    clearCanvas()
+    renderMeme()
+    setTimeout(() => {
+        const imgContent = gElCanvas.toDataURL('image/jpeg')
+        elLink.href = imgContent
+    }, 1000)
 }
 
 function onAddLine() {

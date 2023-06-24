@@ -2,5 +2,17 @@
     width: 200px;
     border: 1px solid #00000020;
     border-radius: 0.8rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 15px 0 rgba(0, 0, 0, 0.1);
+
 }
 
+.gallery-container img:hover {
+    border: 5px solid #d1fa3c20;
+    transition: 0.1s ease-in;
+}
+
+.gallery-container img:active {
+    border: 10px solid rgba(255, 228, 196, 0.719);
+    transition: 0.1s ease-in;
+
+}

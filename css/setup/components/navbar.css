@@ -1,19 +1,47 @@
 .nav-container {
-    background-color: rgb(189, 178, 178);
+    background-color: rgb(253, 247, 193);
     border: 1px solid #00000020;
     padding: 15px;
 }
 
-.nav-container .logo{
+.nav-container .logo {
     font-family: Montserrat;
     font-size: 1.6em;
     margin-inline-start: 2%;
     cursor: pointer;
 }
 
-.nav-container .pages{
+.nav-container .logo:hover {
+    font-weight: 900;
+    color: bisque;
+}
+
+.nav-container .pages {
     font-family: Shrikhand;
     font-size: 1.2em;
     margin-inline-end: 2%;
+}
+
+.nav-container .meme-page {
     cursor: pointer;
+}
+
+.nav-container .meme-page:hover {
+    color: bisque;
+}
+
+.nav-container .gallery-page {
+    cursor: pointer;
+}
+
+.nav-container .gallery-page:hover {
+    color: bisque;
+}
+
+.nav-container .about-page {
+    cursor: pointer;
+}
+
+.nav-container .about-page:hover {
+    color: bisque;
 }
