@@ -7,7 +7,8 @@ let gCurrLineIdx = 0
 let gSelectedLine = 0
 let gIsFocused = false
 let gIsDragging = false
-let movePos = { x: 0, y: 0 }
+let gDragStartPos = { x: 0, y: 0 }
+let gisClicked = false
 
 function initCanvas() {
     gElCanvas = document.querySelector('#my-canvas')
@@ -30,31 +31,45 @@ function renderImage(idx) {
 
 function addEventListeners() {
     gElCanvas.addEventListener('mousedown', onDown)
-    document.addEventListener('mousemove', onMove)
-    document.addEventListener('mouseup', onUp)
+    gElCanvas.addEventListener('mousemove', onMove)
+    gElCanvas.addEventListener('mouseup', onUp)
 }
 
 function onDown(ev) {
-    const pos = getEvPos(ev)
-    console.log(pos)
+    ev.preventDefault()
+
+    let startX = ev.offsetX
+    let startY = ev.offsetY
+    const pos = { x: startX, y: startY }
+    gDragStartPos.x = pos.x
+    gDragStartPos.y = pos.y
+    gisClicked = true
     isLineSelected(pos)
 }
 
 function onMove(ev) {
+    ev.preventDefault()
+
     if (gIsDragging) {
-        let pos = getEvPos(ev)
-        movePos.x = pos.x
-        movePos.y = pos.y
-        console.log('movePos:', movePos)
-        const WIDTH = getTextWidth(gSelectedLine, getMemeInfo().Lines)
-        const startY = (gSelectedLine === 0) ? 8 : 350
-        const size = getMemeInfo().Lines[gSelectedLine].size
-        onUpdateLinePos(gSelectedLine, movePos.x, movePos.y, WIDTH + (gElCanvas.width / 11), (gElCanvas.height / 8) + startY - 16 * size + size * 16)
-        console.log(getMemeInfo().Lines)
+        let mouseX = ev.offsetX
+        let mouseY = ev.offsetY
+
+        let dx = mouseX - gDragStartPos.x
+        let dy = mouseY - gDragStartPos.y
+
+        let currLine = getMemeInfo().Lines[gMeme.selectedLineIdx]
+        currLine.pos.startX += dx
+        currLine.pos.startY += dy
+        currLine.pos.endX += dx
+        currLine.pos.endY += dy
+
+        console.log(getMemeInfo().Lines[gMeme.selectedLineIdx].pos)
+        renderMeme()
     }
 }
 
-function onUp() {
+function onUp(ev) {
+    ev.preventDefault()
     gIsDragging = false
 }
 
@@ -80,13 +95,13 @@ function isLineSelected(pos) {
                 getEditor(i)
                 updateCurrLineIdx(i)
                 updateSelectedLine(i)
-                gIsDragging = true
+                if (gisClicked) gIsDragging = true
             } else if (i === 1) {
                 console.log('Second line selected')
                 getEditor(i)
                 updateCurrLineIdx(i)
                 updateSelectedLine(i)
-                gIsDragging = true
+                if (gisClicked) gIsDragging = true
             }
         }
     }
@@ -135,27 +150,32 @@ function renderMeme() {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         const MEME_INFO = getMemeInfo()
         MEME_INFO.Lines.forEach((line, index) => {
-            const { txt, font, size, color } = line
-            const startY = (index === 0) ? 8 : 350
+            const { txt, font, size, color, pos } = line
+            const heightMod = (index === 0) ? 8 : 350
             gCtx.fillStyle = color
             gCtx.font = `${size}em ${font}`
-            gCtx.fillText(txt, (gElCanvas.width / 11), (gElCanvas.height / 8) + startY)
-            gCtx.strokeText(txt, (gElCanvas.width / 11), (gElCanvas.height / 8) + startY)
+            gCtx.fillText(txt, pos.startX, pos.startY + heightMod)
+            gCtx.strokeText(txt, pos.startX, pos.startY + heightMod)
             if (gIsFocused && line.isSelected) {
-                renderRect(index, MEME_INFO.Lines, startY, size)
+                renderRect(index, MEME_INFO.Lines, heightMod, size)
             }
         })
     }
 }
 
-function renderRect(index, lines, lineHeight, size) {
+function renderRect(index, lines, heightMod, size) {
     const WIDTH = getTextWidth(index, lines)
-    gCtx.strokeRect((gElCanvas.width / 11), (gElCanvas.height / 8) + lineHeight - 16 * size, WIDTH, size * 16)
-    onUpdateLinePos(index, (gElCanvas.width / 11), (gElCanvas.height / 8) + lineHeight - 16 * size, WIDTH + (gElCanvas.width / 11), (gElCanvas.height / 8) + lineHeight - 16 * size + size * 16)
+    const startX = lines[index].pos.startX
+    const startY = lines[index].pos.startY
+    const endX = WIDTH + startX
+    const endY = startY + heightMod - 16 * size + size * 16
+    gCtx.strokeRect(startX, startY + heightMod - 16 * size, WIDTH, size * 16)
+    onUpdateLinePos(index, startX, startY, endX, endY)
 }
 
 function onUpdateLinePos(index, startX, startY, endX, endY) {
     updateLinePos(index, startX, startY, endX, endY)
+    renderMeme()
 }
 
 function getTextWidth(lineIdx, lines) {
