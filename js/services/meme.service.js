@@ -14,10 +14,10 @@ var gMeme = {
             height: 30,
             isSelected: true,
             pos: {
-                startX: 40.9,
-                startY: 56.25,
+                startX: 40.90909090909091,
+                startY: 64.25,
                 endX: 0,
-                endY: 0,
+                endY: 34.25,
             }
         },
         {
@@ -30,9 +30,9 @@ var gMeme = {
             isSelected: false,
             pos: {
                 startX: 40.9,
-                startY: 56.25,
+                startY: 406.25,
                 endX: 0,
-                endY: 0,
+                endY: 376.25,
             }
         }
     ]

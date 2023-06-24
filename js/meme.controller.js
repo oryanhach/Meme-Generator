@@ -36,40 +36,30 @@ function addEventListeners() {
 }
 
 function onDown(ev) {
-    ev.preventDefault()
-
-    let startX = ev.offsetX
-    let startY = ev.offsetY
-    const pos = { x: startX, y: startY }
-    gDragStartPos.x = pos.x
-    gDragStartPos.y = pos.y
-    gisClicked = true
+    const pos = getEvPos(ev)
     isLineSelected(pos)
 }
 
 function onMove(ev) {
-    ev.preventDefault()
 
     if (gIsDragging) {
         let mouseX = ev.offsetX
         let mouseY = ev.offsetY
 
         let dx = mouseX - gDragStartPos.x
+        console.log('dx:',dx)
         let dy = mouseY - gDragStartPos.y
 
         let currLine = getMemeInfo().Lines[gMeme.selectedLineIdx]
-        currLine.pos.startX += dx
-        currLine.pos.startY += dy
-        currLine.pos.endX += dx
-        currLine.pos.endY += dy
-
-        console.log(getMemeInfo().Lines[gMeme.selectedLineIdx].pos)
+        currLine.pos.startX = dx
+        currLine.pos.startY = dy
+        currLine.pos.endX = dx
+        currLine.pos.endY = dy
         renderMeme()
     }
 }
 
 function onUp(ev) {
-    ev.preventDefault()
     gIsDragging = false
 }
 
@@ -87,21 +77,21 @@ function isLineSelected(pos) {
         if (
             pos.x >= lines.Lines[i].pos.startX &&
             pos.x <= lines.Lines[i].pos.endX &&
-            pos.y >= lines.Lines[i].pos.startY &&
-            pos.y <= lines.Lines[i].pos.endY
+            pos.y <= lines.Lines[i].pos.startY &&
+            pos.y >= lines.Lines[i].pos.endY
         ) {
             if (i === 0) {
                 console.log('First line selected')
                 getEditor(i)
                 updateCurrLineIdx(i)
                 updateSelectedLine(i)
-                if (gisClicked) gIsDragging = true
+                gIsDragging = true
             } else if (i === 1) {
                 console.log('Second line selected')
                 getEditor(i)
                 updateCurrLineIdx(i)
                 updateSelectedLine(i)
-                if (gisClicked) gIsDragging = true
+                gIsDragging = true
             }
         }
     }
@@ -132,12 +122,11 @@ function onClearText() {
 
 function onChangeColor(color) {
     changeColor(color)
-    renderImage(gCurrImgIdx)
+    renderMeme()
 }
 
 function onFontSizeChange(symbol) {
     fontSizeChange(symbol)
-    renderImage(gCurrImgIdx)
     renderMeme()
 }
 
@@ -151,31 +140,29 @@ function renderMeme() {
         const MEME_INFO = getMemeInfo()
         MEME_INFO.Lines.forEach((line, index) => {
             const { txt, font, size, color, pos } = line
-            const heightMod = (index === 0) ? 8 : 350
             gCtx.fillStyle = color
             gCtx.font = `${size}em ${font}`
-            gCtx.fillText(txt, pos.startX, pos.startY + heightMod)
-            gCtx.strokeText(txt, pos.startX, pos.startY + heightMod)
+            gCtx.fillText(txt, pos.startX, pos.startY)
+            gCtx.strokeText(txt, pos.startX, pos.startY)
             if (gIsFocused && line.isSelected) {
-                renderRect(index, MEME_INFO.Lines, heightMod, size)
+                renderRect(index, MEME_INFO.Lines, size)
             }
         })
     }
 }
 
-function renderRect(index, lines, heightMod, size) {
+function renderRect(index, lines, size) {
     const WIDTH = getTextWidth(index, lines)
     const startX = lines[index].pos.startX
     const startY = lines[index].pos.startY
-    const endX = WIDTH + startX
-    const endY = startY + heightMod - 16 * size + size * 16
-    gCtx.strokeRect(startX, startY + heightMod - 16 * size, WIDTH, size * 16)
+    const endX = startX + WIDTH
+    const endY = startY - (size * 16)
+    gCtx.strokeRect(startX, startY, WIDTH, -size * 16)
     onUpdateLinePos(index, startX, startY, endX, endY)
 }
 
 function onUpdateLinePos(index, startX, startY, endX, endY) {
     updateLinePos(index, startX, startY, endX, endY)
-    renderMeme()
 }
 
 function getTextWidth(lineIdx, lines) {
@@ -230,6 +217,3 @@ function updateLineInput(idx) {
     const txtInput = getLineInput(idx)
     elInput.value = txtInput
 }
-
-
-// TODO - after finishing phase 5 >>> check pdf for missing requirements >>> phase 6.
