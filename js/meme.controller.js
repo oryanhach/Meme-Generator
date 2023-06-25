@@ -89,7 +89,6 @@ function getEvPos(ev) {
     return pos
 }
 
-
 function isLineSelected(pos) {
     const lines = getMemeInfo()
     for (var i = 0; i < 2; i++) {
@@ -174,7 +173,8 @@ function renderRect(index, lines, size) {
     const startY = lines[index].pos.startY
     const endX = startX + WIDTH
     const endY = startY - (size * 16)
-    gCtx.strokeRect(startX, startY, WIDTH, -size * 16)
+    gCtx.lineWidth = 2
+    gCtx.strokeRect(startX - 4, startY + 4, WIDTH + 8, -size * 16 -2)
     onUpdateLinePos(index, startX, startY, endX, endY)
 }
 
