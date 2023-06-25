@@ -44,18 +44,18 @@
         <section class="editor-container">
             <header class="editor-header">Edit Text Lines</header>
             <section class="text-editor-container">
-                <select class="font-select" value="impact" onchange="onChangeFont(this)">
+                <select class="font-select" title="change font" value="impact" onchange="onChangeFont(this)">
                     <option value="impact">Impact</option>
                     <option value="arial">Arial</option>
                     <option value="verdana">Verdana</option>
                 </select>
-                <button class="minus-btn" onclick="onFontSizeChange('-')">A-</button>
-                <button class="plus-btn" onclick="onFontSizeChange('+')">A+</button>
-                <button class="add-line-btn" onclick="onAddLine()">➕</button>
-                <button class="switch-line-btn" onclick="onSwitchLine()">SWITCH</button>
-                <input class="color-picker" type="color" value="#ffffff" onchange="onChangeColor(this.value)">
-                <input class="text-editor" type="text" oninput="onSetLineTxt(this)">
-                <a href="#" class="download-btn" onclick="downloadImg(this)" download="my-meme.jpg">DOWNLOAD</a>
+                <button class="minus-btn" title="decrease font size" onclick="onFontSizeChange('-')">A-</button>
+                <button class="plus-btn" title="increase font size" onclick="onFontSizeChange('+')">A+</button>
+                <button class="add-line-btn" title="add line" onclick="onAddLine()">➕</button>
+                <button class="switch-line-btn" title="switch line" onclick="onSwitchLine()">SWITCH</button>
+                <input class="color-picker" title="change text color" type="color" value="#ffffff" oninput="onChangeColor(this.value)">
+                <input class="text-editor" type="text" oninput="onSetLineTxt(this)" placeholder=" Write text here">
+                <a href="#" class="download-btn" onclick="downloadImg(this)" title="download meme" download="my-meme.jpg">DOWNLOAD</a>
             </section>
 
         </section>
