@@ -10,6 +10,7 @@
 }
 
 .text-editor-container {
+    flex: 1;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 5em 3em 3em 3em 4.5em 3em;

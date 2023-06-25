@@ -1,13 +1,15 @@
-.canvas-container{
-    margin: 2%;
-    background-color: #393E46;
+.canvas-container {
     grid-column-start: 1;
     grid-column-end: 3;
+    flex: 2;
+    background-color: #393E46;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-canvas{
+canvas {
     border: 2px rgba(102, 96, 10, 0.171) solid;
     border-radius: 1em;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.027), 0 3px 7px 0 rgba(0, 0, 0, 0.034);
-
 }
