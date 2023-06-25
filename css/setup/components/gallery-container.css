@@ -14,7 +14,7 @@
 }
 
 .gallery-container img:active {
-    border: 10px solid rgba(255, 228, 196, 0.719);
+    border: 3px solid #00f2ff80;
     transition: 0.1s ease-in;
-
 }
+

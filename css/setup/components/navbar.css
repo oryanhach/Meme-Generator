@@ -1,5 +1,5 @@
 .nav-container {
-    background-color: rgb(253, 247, 193);
+    background-color: #00ADB5;
     border: 1px solid #00000020;
     padding: 15px;
 }
@@ -12,8 +12,7 @@
 }
 
 .nav-container .logo:hover {
-    font-weight: 900;
-    color: bisque;
+    color: rgb(255, 209, 153);
 }
 
 .nav-container .pages {
