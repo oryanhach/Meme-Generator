@@ -10,6 +10,10 @@
 }
 
 .text-editor-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 5em 3em 3em 3em 4.5em 3em;
+    gap: 1px;
     text-align: center;
     background-color: #00ADB5;
     border: 1px solid #393E46;
@@ -85,15 +89,26 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.09), 0 6px 15px 0 rgba(0, 0, 0, 0.09);
     border-radius: 7px;
     height: 2em;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column: 1 /-1;
 }
 
 .download-btn {
     cursor: pointer;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.09), 0 6px 15px 0 rgba(0, 0, 0, 0.09);
+    font-family: monospace;
+    font-size: 1.4em;
+    font-weight: 900;
+    color: rgb(0, 0, 0);
     border-radius: 7px;
     height: 2em;
+    text-decoration: none;
+    letter-spacing: 1.5px;
+    justify-self: center;
+    grid-column-start: 1;
+    grid-column-end: -1;
 }
 
 .download-btn:hover {
-    font-weight: 900;
+    color: rgb(255, 209, 4);
 }
